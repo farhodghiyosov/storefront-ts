@@ -1,0 +1,35 @@
+{
+  "name": "storefront-ts",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": [
+    "apps/*"
+  ],
+  "engines": {
+    "node": ">=22.12.0",
+    "npm": "10.x"
+  },
+  "scripts": {
+    "dev:web": "npm run dev -w @store/web",
+    "dev:api": "npm run dev -w @store/api",
+    "build": "npm run build -w @store/api && npm run build -w @store/web",
+    "typecheck": "npm run typecheck --workspaces",
+    "test": "npm run test -w @store/api",
+    "db:generate": "npm run db:generate -w @store/api",
+    "db:migrate": "npm run db:migrate -w @store/api",
+    "db:seed": "npm run db:seed -w @store/api",
+    "test:integration": "node scripts/integration.mjs",
+    "test:e2e": "playwright test",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
+  },
+  "overrides": {
+    "@prisma/config": {
+      "effect": "3.22.5"
+    }
+  },
+  "devDependencies": {
+    "prettier": "^3.6.0"
+  },
+  "packageManager": "npm@10.9.6"
+}

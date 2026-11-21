@@ -1,0 +1,51 @@
+generator client {
+  provider = "prisma-client"
+  output = "../src/generated/prisma"
+  moduleFormat = "cjs"
+}
+datasource db {
+  provider = "postgresql"
+}
+model Product {
+  id String @id @default(uuid())
+  slug String @unique
+  name String
+  description String
+  category String
+  price Int
+  oldPrice Int?
+  stock Int @default(0)
+  image String
+  color String
+  featured Boolean @default(false)
+  createdAt DateTime @default(now())
+  items OrderItem[]
+  @@index([category])
+}
+model Order {
+  id String @id @default(uuid())
+  requestId String @unique
+  requestHash String
+  customerName String
+  email String
+  phone String
+  address String
+  comment String?
+  status String @default("NEW")
+  subtotal Int
+  shipping Int
+  total Int
+  createdAt DateTime @default(now())
+  items OrderItem[]
+}
+model OrderItem {
+  id String @id @default(uuid())
+  orderId String
+  productId String
+  name String
+  price Int
+  quantity Int
+  order Order @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  product Product @relation(fields: [productId], references: [id])
+  @@index([orderId])
+}

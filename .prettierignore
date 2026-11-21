@@ -1,0 +1,11 @@
+package-lock.json
+node_modules
+.next
+dist
+**/generated
+playwright-report
+test-results
+*.svg
+*.sql
+
+apps/web/next-env.d.ts
