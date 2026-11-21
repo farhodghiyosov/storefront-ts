@@ -65,7 +65,7 @@ services:
     environment:
       API_INTERNAL_URL: http://api:4000
     ports:
-      - '127.0.0.1:3100:3000'
+      - '${WEB_BIND_ADDRESS:-127.0.0.1}:3100:3000'
     depends_on:
       api:
         condition: service_healthy
